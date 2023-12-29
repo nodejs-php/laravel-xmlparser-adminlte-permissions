@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            $table->foreign('category_id')
+            $table->bigInteger('category_id')
                 ->references('id')
                 ->on('categories')
                 ->cascadeOnDelete();
@@ -22,7 +22,6 @@ return new class extends Migration {
             $table->float('price');
             $table->float('old_price');
             $table->string('currency_id');
-            $table->integer('category_id');
             $table->string('picture');
             $table->string('name');
             $table->string('vendor');

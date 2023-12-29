@@ -1,0 +1,52 @@
+- apiField: id
+  db:
+    table: categories
+    field: referenced_id
+- apiField: parent_id
+  db:
+    table: categories
+    field: parent_id
+- apiField: name
+  db:
+    table: categories
+    field: name
+- apiField: id
+  db:
+    table: offers
+    field: referenced_id
+- apiField: available
+  db:
+    table: offers
+    field: available
+- apiField: url
+  db:
+    table: offers
+    field: url
+- apiField: price
+  db:
+    table: offers
+    field: price
+- apiField: oldprice
+  db:
+    table: offers
+    field: old_price
+- apiField: currencyId
+  db:
+    table: offers
+    field: currency_id
+- apiField: categoryId
+  db:
+    table: offers
+    field: category_id_needed_to_transform_by_matching
+- apiField: picture
+  db:
+    table: offers
+    field: picture
+- apiField: name
+  db:
+    table: offers
+    field: name
+- apiField: vendor
+  db:
+    table: offers
+    field: vendor

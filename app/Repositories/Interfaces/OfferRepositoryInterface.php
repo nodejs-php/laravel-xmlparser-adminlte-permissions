@@ -1,11 +1,10 @@
 <?php
 
-// Define the namespace for the interface.
 namespace App\Repositories\Interfaces;
 
 use Illuminate\Support\Collection;
 
-interface ProductRepositoryInterface
+interface OfferRepositoryInterface
 {
     public function create(array $attributes);
 
