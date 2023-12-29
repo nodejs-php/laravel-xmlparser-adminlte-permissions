@@ -55,6 +55,7 @@ class XmlParser implements ParserInterface
         }
 
         $xml->close();
+        unlink($file);
 
         return $offers;
     }

@@ -57,21 +57,22 @@ class ProductParseCommand extends Command
      */
     public function handle(): void
     {
-      //  try {
+        try {
             $url = config('api.url');
             $configFile = storage_path(config('api.mapped_config'));
-
             $responseData = $this->apiService->fetch($url);
             $data = $responseData['body'];
             $contentType = $responseData['content_type'];
-
             $parsedData = $this->parserService->parse($data, $contentType);
 
-            foreach ($parsedData  as $offer) {
+            foreach ($parsedData as $offer) {
                 $mappedData = $this->mapperService->map($offer, $configFile);
-                var_dump($offer);
-                $this->offerRepository->create((array)$mappedData);
+                $this->offerRepository->create($mappedData);
             }
             $this->info('Товары успешно загружены, сопоставлены и сохранены.');
+        } catch (\Exception $e) {
+            Log::error($e);
+            $this->info('Произошла ошибка при получении, сопоставлении или сохранении продуктов.');
+        }
     }
 }
