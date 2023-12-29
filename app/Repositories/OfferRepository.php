@@ -16,4 +16,9 @@ class OfferRepository implements OfferRepositoryInterface
     {
         return CategoriesOffers::all();
     }
+
+    public function delete()
+    {
+        return CategoriesOffers::query()->delete();
+    }
 }

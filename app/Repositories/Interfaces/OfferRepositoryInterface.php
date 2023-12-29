@@ -9,4 +9,6 @@ interface OfferRepositoryInterface
     public function create(array $attributes);
 
     public function getAll(): Collection;
+
+    public function delete();
 }

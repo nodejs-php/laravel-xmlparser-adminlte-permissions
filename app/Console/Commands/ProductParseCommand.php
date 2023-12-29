@@ -60,6 +60,7 @@ class ProductParseCommand extends Command
             $data = $responseData['body'];
             $contentType = $responseData['content_type'];
             $parsedData = $this->parserService->parse($data, $contentType);
+            $this->offerRepository->delete();
 
             foreach ($parsedData as $offer) {
                 $mappedData = $this->mapperService->map($offer, $configFile);
