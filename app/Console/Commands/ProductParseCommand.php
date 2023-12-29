@@ -9,10 +9,6 @@ use App\Services\MapperService;
 use App\Services\ParserService;
 use Exception;
 use Illuminate\Console\Command;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Foundation\Application;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 
 class ProductParseCommand extends Command
