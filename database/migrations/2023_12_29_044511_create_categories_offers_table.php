@@ -16,13 +16,13 @@ return new class extends Migration
             $table->integer('category_id');
             $table->integer('parent_id')->nullable();
             $table->string('category_name');
-            $table->integer('offer_id');
+            $table->string('offer_id');
             $table->boolean('available');
-            $table->string('url');
-            $table->float('price');
-            $table->float('old_price');
+            $table->string('url')->nullable();
+            $table->float('price')->nullable();
+            $table->float('old_price')->nullable();
             $table->string('currency_id');
-            $table->string('picture');
+            $table->string('picture')->nullable();
             $table->string('offer_name');
             $table->string('vendor');
             $table->timestamps();

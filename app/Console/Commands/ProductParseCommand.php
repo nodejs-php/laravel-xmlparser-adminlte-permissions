@@ -21,7 +21,7 @@ class ProductParseCommand extends Command
         APIService      $apiService,
         ParserService   $parserService,
         MapperService   $mapperService,
-        OfferRepository $productRepository,
+        OfferRepository $offerRepository,
     )
     {
         parent::__construct();
@@ -29,7 +29,7 @@ class ProductParseCommand extends Command
         $this->apiService = $apiService;
         $this->parserService = $parserService;
         $this->mapperService = $mapperService;
-        $this->productRepository = $productRepository;
+        $this->offerRepository = $offerRepository;
     }
 
     /**
@@ -49,7 +49,6 @@ class ProductParseCommand extends Command
     private APIService $apiService;
     private ParserService $parserService;
     private MapperService $mapperService;
-    private CategoryRepository $categoryRepository;
     private OfferRepository $offerRepository;
 
     /**
@@ -68,24 +67,11 @@ class ProductParseCommand extends Command
 
             $parsedData = $this->parserService->parse($data, $contentType);
 
-            foreach ($parsedData['products'] as $product) {
-                $mappedData = $this->mapperService->map($product, $configFile);
-
-                $imagesData = $mappedData['image'];
-                unset($mappedData['image']);
-                $product = $this->categoryRepository->create((array)$mappedData);
-
-                foreach ($imagesData as $imageUrl) {
-                    $this->offerRepository->create([
-                        'product_id' => $product->id,
-                        'image' => $imageUrl,
-                    ]);
-                }
+            foreach ($parsedData  as $offer) {
+                $mappedData = $this->mapperService->map($offer, $configFile);
+                var_dump($offer);
+                $this->offerRepository->create((array)$mappedData);
             }
             $this->info('Товары успешно загружены, сопоставлены и сохранены.');
-     //   } catch (\Exception $e) {
-    //        Log::error($e);
-     //       $this->info('Произошла ошибка при получении, сопоставлении или сохранении продуктов.');
-      //  }
     }
 }

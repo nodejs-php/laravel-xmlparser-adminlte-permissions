@@ -1,27 +1,19 @@
 <?php
-
-// Define the namespace for this class.
 namespace App\Repositories;
 
-
-use App\Models\Offer;
-
-// Import the OfferRepositoryInterface.
+use App\Models\CategoriesOffers;
 use App\Repositories\Interfaces\OfferRepositoryInterface;
-
-// Import Laravel's Collection class.
 use Illuminate\Support\Collection;
 
 class OfferRepository implements OfferRepositoryInterface
 {
-
-    public function create(array $attributes): Offer
+    public function create(array $attributes): CategoriesOffers
     {
-        return Offer::create($attributes);
+        return CategoriesOffers::create($attributes);
     }
 
     public function getAll(): Collection
     {
-        return Offer::all()->load('images');
+        return CategoriesOffers::all();
     }
 }

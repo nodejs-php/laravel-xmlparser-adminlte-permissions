@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class CategoryOffers extends Model
+class CategoriesOffers extends Model
 {
     use HasFactory;
 
@@ -23,7 +23,8 @@ class CategoryOffers extends Model
         'currency_id',
         'offer_id',
         'picture',
-        'name',
+        'category_name',
+        'offer_name',
         'vendor'
     ];
 }
