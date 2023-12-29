@@ -7,6 +7,7 @@ use App\Repositories\OfferRepository;
 use App\Services\APIService;
 use App\Services\MapperService;
 use App\Services\ParserService;
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Foundation\Application;
@@ -53,12 +54,13 @@ class ProductParseCommand extends Command
 
     /**
      * Выполнение команды
+     * @throws Exception
      */
     public function handle(): void
     {
-        try {
+      //  try {
             $url = config('api.url');
-            $configFile = storage_path(env('CONFIG_PATH'));
+            $configFile = storage_path(config('api.mapped_config'));
 
             $responseData = $this->apiService->fetch($url);
             $data = $responseData['body'];
@@ -80,10 +82,10 @@ class ProductParseCommand extends Command
                     ]);
                 }
             }
-            $this->info( 'Товары успешно загружены, сопоставлены и сохранены.');
-        } catch (\Exception $e) {
-            Log::error($e);
-            $this->info( 'Произошла ошибка при получении, сопоставлении или сохранении продуктов.');
-        }
+            $this->info('Товары успешно загружены, сопоставлены и сохранены.');
+     //   } catch (\Exception $e) {
+    //        Log::error($e);
+     //       $this->info('Произошла ошибка при получении, сопоставлении или сохранении продуктов.');
+      //  }
     }
 }

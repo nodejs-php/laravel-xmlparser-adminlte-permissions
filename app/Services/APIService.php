@@ -5,16 +5,20 @@ namespace App\Services;
 
 use App\Repositories\Interfaces\APIServiceInterface;
 // Import the Facade for Laravel's HTTP client.
+use Exception;
 use Illuminate\Support\Facades\Http;
 
 class APIService implements APIServiceInterface
 {
+    /**
+     * @throws Exception
+     */
     public function fetch(string $url): array
     {
         $response = Http::get($url);
 
         if ($response->failed()) {
-            throw new \Exception('Failed to fetch API data');
+            throw new Exception('Не удалось получить данные API.');
         }
 
         return [

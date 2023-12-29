@@ -7,4 +7,7 @@ return [
     'url' => env('API_URL', 'https://quarta-hunt.ru/bitrix/catalog_export/export_Ngq.xml'),
 
     'mapped_config' => env('MAPPED_CONFIG', 'mapped-products.yml'),
+
+    //Для парсинга
+    'xml_temporary_file' => 'xml_temporary_file.xml'
 ];

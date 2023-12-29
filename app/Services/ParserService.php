@@ -18,10 +18,10 @@ class ParserService
      */
     public function parse($data, $contentType): array
     {
-        if ($contentType == 'application/xml') {
+        if ($contentType == 'text/xml') {
             return $this->xmlParser->parse($data);
         } else {
-            throw new Exception('Invalid content type');
+            throw new Exception('Неверный тип контента');
         }
     }
 }
