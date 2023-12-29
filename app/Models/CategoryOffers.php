@@ -4,13 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Offer extends Model
+class CategoryOffers extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'category_id',
+        'parent_id',
+        'name',
         'category_id',
         'referenced_id',
         'available',
@@ -18,14 +21,9 @@ class Offer extends Model
         'price',
         'old_price',
         'currency_id',
-        'category_id',
+        'offer_id',
         'picture',
         'name',
         'vendor'
     ];
-
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
-    }
 }

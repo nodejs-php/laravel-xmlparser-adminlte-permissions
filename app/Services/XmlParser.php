@@ -16,27 +16,45 @@ class XmlParser implements ParserInterface
 
         $xml = new XMLReader();
         $xml->open($file);
+
+        $categories = [];
+        $offers = [];
+
+        $offerElements = ['url', 'price', 'oldprice', 'currencyId', 'categoryId', 'picture', 'name', 'vendor'];
+
         while ($xml->read()) {
-           // if ($xml->nodeType == XMLReader::END_ELEMENT) break;
-            dd($xml->name);
-            if ($xml->nodeType === XMLReader::ELEMENT ) {
-                dd($xml->name);
-            } else if ($xml->nodeType == XMLReader::TEXT) $assoc = $xml->value;
+            if ($xml->nodeType === XMLReader::ELEMENT && $xml->name === 'category') {
+                $categories[$xml->getAttribute('id')] = [
+                    'parent_id' => $xml->getAttribute('parentId'),
+                    'text' => $xml->readString(),
+                ];
+            }
+
+            if ($xml->nodeType === XMLReader::ELEMENT && $xml->name === 'offer') {
+                $offerId = $xml->getAttribute('id');
+                $offers[$offerId] = [
+                    'available' => $xml->getAttribute('available'),
+                ];
+            }
+
+            //Начато чтение offer
+            if (isset($offerId)) {
+                foreach ($offerElements as $offerElement) {
+                    if ($xml->nodeType === XMLReader::ELEMENT && $xml->name === $offerElement) {
+                        $offers[$offerId][$offerElement] = $xml->readString();
+                    }
+                }
+
+                if ($xml->nodeType === XMLReader::ELEMENT && $xml->name === 'categoryId') {
+                    $categoryId = $xml->readString();
+                    $offers[$offerId]['categoryId'] = $categoryId;
+                    $offers[$offerId]['category'] = $categories[$categoryId];
+                }
+            }
         }
 
         $xml->close();
 
-
-        $products = [];
-        foreach ($phpArray['products'] as $product) {
-            if (isset($product['images']) && !is_array($product['images'])) {
-                $product['images'] = [$product['images']];
-            }
-            $products[] = $product;
-        }
-
-        $phpArray['products'] = $products;
-
-        return $phpArray;
+        return $offers;
     }
 }
