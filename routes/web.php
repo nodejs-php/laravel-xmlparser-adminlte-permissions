@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +21,8 @@ Route::get('/', function () {
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::namespace('Auth')->middleware('guest:admin')->group(function(){
-        // login route
-        Route::get('login','AuthenticatedSessionController@create')->name('login');
-        Route::post('login','AuthenticatedSessionController@store')->name('adminlogin');
+        Route::get('login',[AuthenticatedSessionController::class, 'create'])->name('login');
+        Route::post('login',[AuthenticatedSessionController::class, 'store'])->name('adminlogin');
     });
     Route::middleware('admin')->group(function(){
         Route::get('dashboard','HomeController@index')->name('dashboard');
