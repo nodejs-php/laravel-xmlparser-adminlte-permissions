@@ -12,6 +12,6 @@ class HomeController extends Controller
 {
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('admin.layouts.dashboard');
+        return view('admin.dashboard');
     }
 }

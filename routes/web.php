@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,12 +15,14 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
         Route::post('login',[AuthenticatedSessionController::class, 'store'])->name('adminlogin');
     });
     Route::middleware('admin')->group(function(){
-        Route::get('dashboard','HomeController@index')->name('dashboard');
-        Route::get('admin-test','HomeController@adminTest')->name('admintest');
-        Route::get('editor-test','HomeController@editorTest')->name('editortest');
+        Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
     });
-    Route::post('logout','Auth\AuthenticatedSessionController@destroy')->name('logout');
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
 
 Route::get('/export', [AdminController::class, 'export']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
