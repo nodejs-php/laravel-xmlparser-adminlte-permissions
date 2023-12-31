@@ -1,19 +1,11 @@
-@extends('adminlte::page')
-
-@section('title', 'Dashboard')
+@extends('admin.layouts.dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Таблица товаров</h1>
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
+    <p>
+        <button type="submit" class="btn btn-block btn-primary download"  onclick="window.location.href='{{asset('/export')}}'">Excel файл</button>
+    </p>
 @stop

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\OffersController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,8 +22,5 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 });
 
 
-Route::get('/export', [AdminController::class, 'export']);
-
-Auth::routes();
-
+Route::get('/export', [OffersController::class, 'export'])->middleware('admin');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
