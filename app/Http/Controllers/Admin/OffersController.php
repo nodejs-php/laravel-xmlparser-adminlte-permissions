@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 use App\Exports\CategoriesOffersExport;
 use App\Models\CategoriesOffers;
-use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -32,11 +31,14 @@ class OffersController extends AdminController
 
         // Search
         $search = $request->cSearch;
-        $query = $query->where(function ($query) use ($search) {
-            $query->orWhere('category_name', 'like', "%" . $search . "%");
-            $query->orWhere('offer_name', 'like', "%" . $search . "%");
-            $query->orWhere('price', 'like', "%" . $search . "%");
-        });
+        //Log::info($search);
+        if ($search) {
+            $query = $query->where(function ($query) use ($search) {
+                $query->orWhere('category_name', 'like', "%" . $search . "%");
+                $query->orWhere('offer_name', 'like', "%" . $search . "%");
+                $query->orWhere('price', 'like', "%" . $search . "%");
+            });
+        }
 
         $orderByName = 'name';
         switch ($orderColumnIndex) {

@@ -1,3 +1,8 @@
 button.download{
     width: 300px;
 }
+
+
+table td img{
+    max-width: 40px;
+}

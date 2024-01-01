@@ -23,14 +23,24 @@
             <button class="btn btn-primary my-3" id="searchBtn">Search</button>
         </div>
         <div class="col-12">
-            <table id="datatable" class="table" style="width:100%">
+            <table id="datatable" class="table"  style="width:100%">
                 <thead class="table-dark">
                 <tr>
-                    <td>Name</td>
-                    <td>Email</td>
-                    <td>Remember Token</td>
+                    <td>ID</td>
+                    <td>Category ID</td>
+                    <td>Parent ID</td>
+                    <td>Category Name</td>
+                    <td>Offer ID</td>
+                    <td>Available</td>
+                    <td>Url</td>
+                    <td>Price</td>
+                    <td>Old Price</td>
+                    <td>Currency ID</td>
+                    <td>Picture</td>
+                    <td>Offer Name</td>
+                    <td>Vendor</td>
                     <td>Created At</td>
-                    <td></td>
+                    <td>Updated At</td>
                 </tr>
                 </thead>
             </table>
@@ -73,26 +83,61 @@
                 order: ['1', 'DESC'],
                 pageLength: 10,
                 searching: false,
+                bAutoWidth: true,
                 aoColumns: [
                     {
-                        data: 'name',
+                        data: 'id',
                     },
                     {
-                        data: 'email',
+                        data: 'category_id',
                     },
                     {
-                        data: 'remember_token',
+                        data: 'parent_id',
+                    },
+                    {
+                        data: 'category_name',
+                    },
+                    {
+                        data: 'offer_id',
+                    },
+                    {
+                        data: 'available',
+                        render: function (data, type, row) {
+                            return Boolean(row.available);
+                        }
+                    },
+                    {
+                        data: 'url',
+                        render: function (data, type, row) {
+                            return `<a href="${row.url}">Move</a>`;
+                        }
+                    },
+                    {
+                        data: 'price',
+                    },
+                    {
+                        data: 'old_price',
+                    },
+                    {
+                        data: 'currency_id',
+                    },
+                    {
+                        data: 'picture',
+                        render: function (data, type, row) {
+                            return `<img src="${row.picture}"/>`;
+                        }
+                    },
+                    {
+                        data: 'offer_name',
+                    },
+                    {
+                        data: 'vendor',
                     },
                     {
                         data: 'created_at',
-                        width: "20%",
                     },
                     {
-                        data: 'id',
-                        width: "20%",
-                        render: function (data, type, row) {
-                            return `<a href="${row.id}">View</a>`;
-                        }
+                        data: 'updated_at',
                     }
                 ]
             });
