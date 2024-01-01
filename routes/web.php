@@ -17,10 +17,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     });
     Route::middleware('admin')->group(function(){
         Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
+        Route::get('export', [OffersController::class, 'export'])->name('export');
+        Route::post('list-offers', [OffersController::class, 'listOffers'])->name('list-offers');
     });
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
-
-Route::get('/export', [OffersController::class, 'export'])->middleware('admin');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
