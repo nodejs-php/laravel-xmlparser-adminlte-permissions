@@ -3,18 +3,35 @@
 namespace App\Http\Controllers\Admin;
 use App\Exports\CategoriesOffersExport;
 use App\Models\CategoriesOffers;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class OffersController extends AdminController
 {
-    public function export(): BinaryFileResponse
+    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('admin.dashboard');
+    }
+
+    public function downloadProducts(): BinaryFileResponse
     {
         return Excel::download(new CategoriesOffersExport, 'invoices.xlsx');
     }
 
+    public function loadAndParseProduct()
+    {
+        Artisan::call('products:load');
+
+        return response()->json([
+            "success" => 1,
+        ]);
+    }
 
     public function listOffers(Request $request): JsonResponse
     {
@@ -66,5 +83,15 @@ class OffersController extends AdminController
             "recordsFiltered" => $recordsFiltered,
             'data' => $offers
         ], 200);
+    }
+
+    public function downloadPage(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('admin.download-page');
+    }
+
+    public function importPage(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('admin.import-page');
     }
 }

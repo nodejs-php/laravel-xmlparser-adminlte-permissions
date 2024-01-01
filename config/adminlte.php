@@ -253,7 +253,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -305,13 +305,22 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'Продукты'],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Таблица продуктов',
+            'url'  => 'admin/dashboard',
+            'icon' => 'fas fa-duotone fa-dice-d20',
         ],
-
+        [
+            'text' => 'Импорт продуктов',
+            'url'  => 'admin/import-page',
+            'icon' => 'fas fa-duotone fa-file-import',
+        ],
+        [
+            'text' => 'Выгрузка продуктов',
+            'url'  => 'admin/download-page',
+            'icon' => 'fas fa-download',
+        ],
     ],
 
     /*

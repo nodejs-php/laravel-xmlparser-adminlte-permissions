@@ -33,7 +33,7 @@ class ProductParseCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'products-load';
+    protected $signature = 'products:load';
 
     /**
      * The console command description.

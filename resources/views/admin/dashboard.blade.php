@@ -10,12 +10,6 @@
 
 
 @section('content')
-    <div class="row">
-        <button type="submit" class="btn btn-block btn-secondary download"
-                onclick="window.location.href='{{asset('admin/export')}}'">Excel файл
-        </button>
-    </div>
-
     <div class="row mt-2">
         <div class="col-12 form-group">
             <label for="search">Поиск</label>
