@@ -1,15 +1,15 @@
-<?php 
+<?php
 namespace App\Traits;
 use App\Models\Permission;
 use App\Models\Role;
 
 trait HasPermissionsTrait{
-	// get permissions 
+	// get permissions
 	public function getAllPermissions($permission){
 		return Permission::whereIn('slug',$permission)->get();
 	}
 
-	// check has permission 
+	// check has permission
 	public function hasPermission($permission){
 		return (bool) $this->permissions->where('slug',$permission->slug)->count();
 	}
@@ -53,6 +53,6 @@ trait HasPermissionsTrait{
 	public function roles(){
 		return $this->belongsTomany(Role::class,'users_roles');
 	}
-	
+
 
 }

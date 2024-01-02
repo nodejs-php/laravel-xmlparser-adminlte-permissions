@@ -29,7 +29,7 @@
                     alert('Товары импортированы успешно');
                 },
                 error: function (result) {
-                    alert('Ошибка при импорте товаров');
+                    alert('Ошибка при импорте товаров: ' + result.responseText);
                 }
             });
         });

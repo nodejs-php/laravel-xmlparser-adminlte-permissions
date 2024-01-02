@@ -21,7 +21,11 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::get('/', function () {
         return redirect('/admin/dashboard');
     });
+    Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+});
 
+Route::get('/', function () {
+    return redirect('/admin/dashboard');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

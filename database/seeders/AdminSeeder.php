@@ -31,19 +31,20 @@ class AdminSeeder extends Seeder
         ]);
 
         Permission::insert([
-            ['name'=>'Loader','slug'=>'data-loader'],
-            ['name'=>'Viewer','slug'=>'data-viewer'],
+            ['name'=>'Table View','slug'=>'table-view'],
+            ['name'=>'Data View','slug'=>'data-load'],
+            ['name'=>'Data View','slug'=>'data-view'],
         ]);
 
-        // Assign Role
+        // Assign AdminRole
         Admin::whereId(1)->first()->roles()->attach([1]);
         Admin::whereId(2)->first()->roles()->attach([2]);
         Admin::whereId(3)->first()->roles()->attach([3]);
 
-        // Role has Permission
-        Role::whereId(1)->first()->permissions()->attach([1,2]);
-        Role::whereId(2)->first()->permissions()->attach([1]);
-        Role::whereId(3)->first()->permissions()->attach([1]);
+        // AdminRole has AdminPermission
+        Role::whereId(1)->first()->permissions()->attach([1,2,3]);
+        Role::whereId(2)->first()->permissions()->attach([1,2,3]);
+        Role::whereId(3)->first()->permissions()->attach([1,3]);
 
     }
 }

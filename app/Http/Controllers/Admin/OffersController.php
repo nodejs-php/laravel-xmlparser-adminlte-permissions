@@ -3,51 +3,54 @@
 namespace App\Http\Controllers\Admin;
 use App\Exports\CategoriesOffersExport;
 use App\Models\CategoriesOffers;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Artisan;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class OffersController extends AdminController
 {
+    /**
+     * @throws AuthorizationException
+     */
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $this->authorize('table-view');
         return view('admin.dashboard');
     }
 
-    public function downloadProducts(): BinaryFileResponse
+    public function downloadProducts(): BinaryFileResponse|Response
     {
-        if (\Gate::forUser(\Auth::guard('admin')->user())->allows(['admin', 'data-viewer'])) {
+        if (\Gate::forUser(\Auth::guard('admin')->user())->allows(['data-view'])) {
             return Excel::download(new CategoriesOffersExport, 'invoices.xlsx');
         } else {
-            return response()->json([
-                "success" => 0, 'error' => 'No permission'
-            ]);
+            return response('Нет прав', 405);
         }
     }
 
-    public function loadAndParseProduct(): JsonResponse
+    public function loadAndParseProduct(): JsonResponse|Response
     {
-        if (\Gate::forUser(\Auth::guard('admin')->user())->allows(['admin', 'data-loader'])) {
+        if (\Gate::forUser(\Auth::guard('admin')->user())->allows(['data-load'])) {
             Artisan::call('products:load');
         } else {
-            return response()->json([
-                "success" => 0, 'error' => 'No permission'
-            ]);
+            return response('Нет прав', 405);
         }
 
         return response()->json([
             "success" => 1,
         ]);
+
     }
 
     public function listOffers(Request $request): JsonResponse
     {
-
+        $this->authorize('table-view');
         // Page Length
         $pageNumber = ($request->start / $request->length) + 1;
         $pageLength = $request->length;
@@ -99,11 +102,14 @@ class OffersController extends AdminController
 
     public function downloadPage(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $this->authorize('data-view');
+
         return view('admin.download-page');
     }
 
     public function importPage(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $this->authorize('data-load');
         return view('admin.import-page');
     }
 }

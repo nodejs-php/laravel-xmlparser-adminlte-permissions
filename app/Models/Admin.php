@@ -47,4 +47,5 @@ class Admin extends Authenticatable
     public function categories_offers(){
         return $this->hasMany(CategoriesOffers::class);
     }
+
 }
