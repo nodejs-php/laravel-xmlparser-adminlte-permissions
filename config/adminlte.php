@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Админка',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => 'Админка',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -290,36 +290,27 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
-        [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-        ],
-        [
-            'type'         => 'fullscreen-widget',
-            'topnav_right' => true,
-        ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
         ['header' => 'Продукты'],
         [
             'text' => 'Таблица продуктов',
             'url'  => 'admin/dashboard',
-            'icon' => 'fas fa-duotone fa-dice-d20',
+            'icon' => 'fas  fa-fw fa-duotone fa-dice-d20',
         ],
         [
             'text' => 'Импорт продуктов',
             'url'  => 'admin/import-page',
-            'icon' => 'fas fa-duotone fa-file-import',
+            'icon' => 'fas  fa-fw fa-duotone fa-file-import',
         ],
         [
             'text' => 'Выгрузка продуктов',
             'url'  => 'admin/download-page',
-            'icon' => 'fas fa-download',
+            'icon' => 'fas  fa-fw fa-download',
+        ],
+        ['header' => 'Аккаунт'],
+        [
+            'text' => 'Выход',
+            'url' => 'admin/download-page',
+            'icon' => 'fa  fa-fw fa-sign-out',
         ],
     ],
 

@@ -21,12 +21,24 @@ class OffersController extends AdminController
 
     public function downloadProducts(): BinaryFileResponse
     {
-        return Excel::download(new CategoriesOffersExport, 'invoices.xlsx');
+        if (\Gate::forUser(\Auth::guard('admin')->user())->allows(['admin', 'data-viewer'])) {
+            return Excel::download(new CategoriesOffersExport, 'invoices.xlsx');
+        } else {
+            return response()->json([
+                "success" => 0, 'error' => 'No permission'
+            ]);
+        }
     }
 
-    public function loadAndParseProduct()
+    public function loadAndParseProduct(): JsonResponse
     {
-        Artisan::call('products:load');
+        if (\Gate::forUser(\Auth::guard('admin')->user())->allows(['admin', 'data-loader'])) {
+            Artisan::call('products:load');
+        } else {
+            return response()->json([
+                "success" => 0, 'error' => 'No permission'
+            ]);
+        }
 
         return response()->json([
             "success" => 1,

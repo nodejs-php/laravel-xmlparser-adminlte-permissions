@@ -4,10 +4,6 @@ use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\OffersController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::namespace('Auth')->middleware('guest:admin')->group(function(){
         Route::get('login',[AuthenticatedSessionController::class, 'create'])->name('login');
@@ -22,6 +18,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
         Route::post('import-products', [OffersController::class, 'loadAndParseProduct'])->name('import-products');
     });
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+    Route::get('/', function () {
+        return redirect('/admin/dashboard');
+    });
+
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
