@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class CategoriesOffersExport implements FromQuery, WithHeadings
+class CategoriesOffersExport implements FromQuery, WithHeadings, WithStyles
 {
     use Exportable;
 
@@ -68,6 +70,13 @@ class CategoriesOffersExport implements FromQuery, WithHeadings
             'vendor',
             'created_at',
             'updated_at',
+        ];
+    }
+
+    public function styles(Worksheet $sheet): array
+    {
+        return [
+            1 => ['font' => ['bold' => true]]
         ];
     }
 }
