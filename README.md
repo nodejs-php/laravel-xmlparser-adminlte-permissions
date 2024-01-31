@@ -16,6 +16,12 @@
 В админке рализованы роли, права на каждого из пользователей для просмотра админки.
 ``/admin``
 
+# Работа с внешним API, загрузка и выгрузка с Excel. Админка AdminLTE
+
+## Демонстрация работы приложения:
+[![IMAGE ALT TEXT HERE](resources/video.png)](https://www.youtube.com/watch?v=aF0bDYYOHqI&t=118s)
+
+
 
 
 
